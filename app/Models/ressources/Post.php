@@ -35,6 +35,11 @@ class Post extends Model
     {
         return self::findOrFail($id);
     }
+    public static function getIdByTitle($title)
+    {
+        $post = self::where('title', $title);
+        return $post->post_id;
+    }
 
     // Update
     public function updatePost($title, $dateCreation, $description)

@@ -17,17 +17,19 @@ class Member extends Model
     }
 
     // Create
-    public static function createMember($communauteId, $inscriptionDate, $title, $cycle, $biographie, $path_to_photo, $filliere, $nationality)
+    public static function createMember($member)
     {
         return self::create([
-            'communaute_id' => $communauteId,
-            'inscription_date' => $inscriptionDate,
-            'title' => $title,
-            'cycle' => $cycle,
-            'biographie' => $biographie,
-            'path_to_photo' => $path_to_photo,
-            'filliere' => $filliere,
-            'nationality' => $nationality,
+            'communaute_id' => $menber->communauteId,
+            'inscription_date' => $menber->inscriptionDate,
+            'title' => $menber->title,
+            'cycle' => $menber->cycle,
+            'name' => $menber->name,
+            'firstname' => $menber->firstname,
+            'biographie' => $menber->biographie,
+            'path_to_photo' => $menber->path_to_photo,
+            'filliere' => $menber->filliere,
+            'nationality' => $menber->nationality,
         ]);
     }
 
@@ -43,17 +45,19 @@ class Member extends Model
     }
 
     // Update
-    public function updateMember($communauteId, $inscriptionDate, $title, $cycle, $biographie, $path_to_photo, $filliere, $nationality)
+    public function updateMember($member)
     {
         $this->update([
-            'communaute_id' => $communauteId,
-            'inscription_date' => $inscriptionDate,
-            'title' => $title,
-            'cycle' => $cycle,
-            'biographie' => $biographie,
-            'path_to_photo' => $path_to_photo,
-            'filliere' => $filliere,
-            'nationality' => $nationality,
+            'communaute_id' => $member->communauteId,
+            'inscription_date' => $member->inscriptionDate,
+            'title' => $member->title,
+            'cycle' => $member->cycle,
+            'name' => $member->name,
+            'firstname' => $member->firstname,
+            'biographie' => $member->biographie,
+            'path_to_photo' => $member->path_to_photo,
+            'filliere' => $member->filliere,
+            'nationality' => $member->nationality,
         ]);
     }
     public static function getByFiliere($filiere)
@@ -61,9 +65,14 @@ class Member extends Model
         return self::where('filliere', $filiere)->get();
     }
 
-    public static function getByNationality($nationality)
+    public static function getByName($name)
     {
-        return self::where('nationality', $nationality)->get();
+        return self::where('fistname', $name)->get();
+    }
+
+    public static function getCommunityMember($community_id)
+    {
+        return self::where('community_id', $community_id)->get();
     }
 
     // Delete

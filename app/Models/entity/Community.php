@@ -16,13 +16,13 @@ class Community extends Model
     }
 
     // Create
-    public static function createCommunity($name, $description, $belongDate, $path_to_logo)
+    public static function createCommunity($community)
     {
         return self::create([
-            'name' => $name,
-            'description' => $description,
-            'belongDate' => $belongDate,
-            'path_to_logo' => $path_to_logo,
+            'name' => $community->name,
+            'description' => $community->description,
+            'belongDate' => $community->belongDate,
+            'path_to_logo' => $community->path_to_logo,
         ]);
     }
 
@@ -35,6 +35,11 @@ class Community extends Model
     public static function getCommunityById($id)
     {
         return self::findOrFail($id);
+    }
+
+    public static function getCommunityByName($name)
+    {
+        return self::where('name', $name)->get();
     }
 
     // Update
@@ -52,8 +57,8 @@ class Community extends Model
         return $this->members()->where('name', 'like', '%' . $name . '%')->get();
     }
     // Delete
-    public function deleteCommunity()
+    public function deleteCommunity($id)
     {
-        $this->delete();
+        $this->delete()->where('id', $id);
     }
 }

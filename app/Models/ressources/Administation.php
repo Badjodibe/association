@@ -21,13 +21,13 @@ class Administration extends Model
     }
 
     // Create
-    public static function createAdministration($postId, $memberId, $description, $mandat)
+    public static function createAdministration($administration)
     {
         return self::create([
-            'post_id' => $postId,
-            'member_id' => $memberId,
-            'description' => $description,
-            'mandat' => $mandat,
+            'post_id' => $administration->postId,
+            'member_id' => $administration->memberId,
+            'description' => $administration->description,
+            'mandat' => $administration->mandat,
         ]);
     }
 
@@ -52,7 +52,16 @@ class Administration extends Model
             'mandat' => $mandat,
         ]);
     }
+    public function getAdministrationByTitle($title){
+        $post_id = Post::getIdByTitle($title);
+        $members_id = self::where('post_id', $post_id)->member_id;
+        return $this->member()->whereIn('member_id', $members_id);
+    }
 
+    public function getAdministrationByDate($date){
+        $members_id = self::where('duree', $date)->member_id;
+        return $this->member()->where('member_id', $members_id);
+    }
     // Delete
     public function deleteAdministration()
     {
