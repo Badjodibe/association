@@ -25,8 +25,13 @@ class Document extends Model
     public function getDocumentByDate($date){
         return self::where('date_creation', $date);
     }
+
     public function getDocumentByCreator($creator){
         return self::where('creator', $creator);
+    }
+
+    public function getDocumentById($id){
+        return self::findOrfail($id);
     }
 
     public function updateDocument($document){

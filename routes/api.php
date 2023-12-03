@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 // routes for all member operations
-Route::get('api/members', [MemberController::class, 'getAllMembers']);
+Route::get('/api/members', [MemberController::class, 'getAllMembers']);
 Route::get('api/members/{name}', [MemberController::class, 'getAllMembers']);
 Route::get('api/members/{filliere}', [MemberController::class, 'getByFiliere']);
 Route::get('api/members/{community_id}',[MemberController::class, 'getAllMembers']);
@@ -48,3 +48,11 @@ Route::get('api/posts', [PostController::class, 'getAllPosts']);
 Route::get('api/posts/{id}', [PostController::class, 'getPostById']);
 Route::put('api/posts/update', [PostController::class, 'updatePost']);
 Route::post('api/posts/add', [PostController::class, 'createPost']);
+
+// routes for document
+Route::get('api/documents', [DocumentController::class, 'getAllDocument']);
+Route::post('api/documents/add', [DocumentController::class, 'createDocument']);
+Route::get('api/documents/{date}', [DocumentController::class, 'getDocumentByDate']);
+Route::get('api/documents/{creator}', [DocumentController::class, 'getDocumentByCreator']);
+Route::get('api/documents/{id}', [DocumentController::class, 'getDocumentById']);
+Route::put('api/documents/update', [DocumentController::class, 'updateDocument']);
