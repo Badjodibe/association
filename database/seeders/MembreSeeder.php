@@ -3,6 +3,8 @@
 namespace database\seeders;
 use Illuminate\Database\Seeder;
 use App\Models\entity\Member;
+use App\Models\entity\Community;
+use App\Models\User;
 
 class MembreSeeder extends Seeder
 {
