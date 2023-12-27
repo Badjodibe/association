@@ -8,29 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-    protected $fillable = ['communaute_id', 'inscription_date', 'title', 'cycle', 'biographie', 'path_to_photo', 'filliere', 'nationality'];
-
+    protected $fillable = ["name", "surnames", "community_id", "user_id", "filliere", "belongDate","photo","description", "role_id"];
+    protected $table = 'membres';
     // Relations
     public function community()
     {
         return $this->belongsTo(Community::class, 'communaute_id');
     }
-
+    public function user(){
+        return $this->belongTo(User::Class);
+    }
     // Create
     public static function createMember($member)
     {
-        return self::create([
-            'communaute_id' => $menber->communauteId,
-            'inscription_date' => $menber->inscriptionDate,
-            'title' => $menber->title,
-            'cycle' => $menber->cycle,
-            'name' => $menber->name,
-            'firstname' => $menber->firstname,
-            'biographie' => $menber->biographie,
-            'path_to_photo' => $menber->path_to_photo,
-            'filliere' => $menber->filliere,
-            'nationality' => $menber->nationality,
-        ]);
+            return self::create($member);
     }
 
     // Read
@@ -39,40 +30,32 @@ class Member extends Model
         return self::all();
     }
 
-    public static function getMemberById($id)
+    public static function getMemberById($member_id)
     {
-        return self::findOrFail($id);
+        return self::where('member_id', $member_id)->get();
     }
 
     // Update
     public function updateMember($member)
     {
-        $this->update([
-            'communaute_id' => $member->communauteId,
-            'inscription_date' => $member->inscriptionDate,
-            'title' => $member->title,
-            'cycle' => $member->cycle,
-            'name' => $member->name,
-            'firstname' => $member->firstname,
-            'biographie' => $member->biographie,
-            'path_to_photo' => $member->path_to_photo,
-            'filliere' => $member->filliere,
-            'nationality' => $member->nationality,
-        ]);
+        $this->update($member);
     }
     public static function getByFiliere($filiere)
     {
         return self::where('filliere', $filiere)->get();
     }
-
-    public static function getByName($name)
+    public static function getByUserId($userId)
     {
-        return self::where('fistname', $name)->get();
+    return self::where('user_id', $userId)->get();
+    }
+    public static function getMemberByName($name)
+    {
+        return Member::where('name', $name)->first();
     }
 
     public static function getCommunityMember($community_id)
     {
-        return self::where('community_id', $community_id)->get();
+        return Member::where('community_id', $community_id)->get();
     }
 
     // Delete

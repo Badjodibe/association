@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Community extends Model
 {
-    protected $fillable = ['name', 'description', 'belongDate', 'path_to_logo'];
+    use HasFactory;
+    protected $fillable = ['pays','name', 'descriptions', 'belongDate', 'logo', 'community_id'];
+    protected $table = 'communities';
+    protected $primaryKey = 'community_id';
 
     // Relations
     public function members()
@@ -18,12 +21,8 @@ class Community extends Model
     // Create
     public static function createCommunity($community)
     {
-        return self::create([
-            'name' => $community->name,
-            'description' => $community->description,
-            'belongDate' => $community->belongDate,
-            'path_to_logo' => $community->path_to_logo,
-        ]);
+
+        return self::create($community);
     }
 
     // Read
@@ -32,9 +31,9 @@ class Community extends Model
         return self::all();
     }
 
-    public static function getCommunityById($id)
+    public static function getCommunityById($community_id)
     {
-        return self::findOrFail($id);
+        return Community::find($community_id);
     }
 
     public static function getCommunityByName($name)
@@ -43,22 +42,39 @@ class Community extends Model
     }
 
     // Update
-    public function updateCommunity($name, $description, $belongDate, $path_to_logo)
+    public static function updateCommunity($community)
     {
-        $this->update([
-            'name' => $name,
-            'description' => $description,
-            'belongDate' => $belongDate,
-            'path_to_logo' => $path_to_logo,
-        ]);
+        $commu = self::find($community["community_id"]);
+        if ($commu) {
+            $commu->update($community);
+            return $community;
+        }
     }
-    public function getMembersByName($name)
+    public static function getMembersByName($name)
     {
         return $this->members()->where('name', 'like', '%' . $name . '%')->get();
     }
     // Delete
-    public function deleteCommunity($id)
+    public static function deleteCommunity($community_id)
     {
-        $this->delete()->where('id', $id);
+        $commu = self::find($community_id);
+        if ($commu) {
+            $commu->delete();
+            return true;
+        }
+    }
+
+    
+    public function saveImage($data, $path){
+        if ($data->hasFile('image') && $data->file('image')->isValid()) {
+            $image = $data->file('image');
+            $nom = $data->nom. $image->getClientOriginalExtension();
+            $path = $image->store('images', $nom, 'media'); // Enregistre l'image dans le dossier 'public/images'
+            $go = $path + $nom;
+            return self::create($go);
+        }
+        else{
+            return "error";
+        }
     }
 }

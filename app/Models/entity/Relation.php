@@ -4,35 +4,25 @@ namespace App\Models\entity;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\entity\Community;
 
 class Relation extends Model
 {
     use HasFactory;
-    protected $fillable = ['entity_name', 'type_relation', 'description', 'date', 'path_to_logo'];
+    protected $fillable = ['nom', 'logo'];
+    protected $table = 'relation';
 
-    public function getAllRelation(){
+    public static function getAllRelation(){
         return self::all();
     }
-    public function createRelation($relation){
-        return self::create([
-            'entity_name' => $relation->entity_name,
-            'type_relation' => $relation->type_relation,
-            'description' => $relation->description,
-            'date'=> $relation->date,
-            'path_to_logo' => $relation->path_to_logo
-        ]);
+    public static function createRelation($relation){
+        return self::create($relation);
     }
-    public function getRelationByName($name){
-        return self::where('entity_name', $name);
+    public static function getRelationByName($nom){
+        return self::where('nom', $nom);
     }
 
-    public function updateRelation($relation){
-        $this->update([
-            'entity_name' => $relation->entity_name,
-            'type_relation' => $relation->type_relation,
-            'description' => $relation->description,
-            'date'=> $relation->date,
-            'path_to_logo' => $relation->path_to_logo
-        ]);
+    public static function updateRelation($relation){
+        $this->update($relation);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -42,4 +43,67 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function member(){
+        return $this->hasOne(Member::class);
+    }
+    public function getId()
+    {
+        return self::getKey();
+    }
+
+    public static function createUser($userData)
+    {
+        $userData['password'] = Hash::make($userData['password']);
+        return self::create($userData);
+    }
+
+    public static function getUserById($userId)
+    {
+        return self::find($userId);
+    }
+
+    public static function updateUser($userId, $newUserData)
+    {
+        $user = self::find($userId);
+        if ($user) {
+            $user->fill($newUserData);
+            $user->save();
+            return $user;
+        }
+        return null;
+    }
+
+    public static function deleteUser($userId)
+    {
+        $user = self::find($userId);
+        if ($user) {
+            $user->delete();
+            return true;
+        }
+        return false;
+    }
+
+    public static function getAllUser()
+    {
+        return self::all();
+    }
+
+    public static function getUserByMail($email)
+    {
+        return self::where('email', $email)->first();
+    }
+    public static function getUserIdByEmail($email)
+    {
+    $user = User::where('email', $email)->first();
+
+    if ($user) {
+        $userId = $user->id;
+        return $userId;
+    }
+
+    // Retourner null ou une valeur par défaut si l'e-mail n'est pas trouvé
+    return null;
+    }
 }
+
