@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\entity\Member;
 class Security extends Controller
 {
-    /*public function createUser(Request $request)
+    public function createUser(Request $request)
     {
         $newUser = User::createUser([
             'name' => $request->input('name'),
@@ -22,7 +22,27 @@ class Security extends Controller
         return response()->json($newUser);
 
     }
-    */
+
+    // public function login(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
+
+    //     if (Auth::attempt($credentials)) {
+    //         // L'utilisateur est authentifié
+    //         //return response()->json($credentials);
+
+    //         //$member_id = User::getUserIdByEmail($credentials['email']);
+    //         $authUser = User::getUserIdByEmail($credentials['email']);
+    //         if($credentials['password'] != $authUser->password){
+    //             return back()->with('error', 'Mot de passe incorrect!');
+    //         }
+    //         $currentMember = Member::getMemberbyId($authUser->id);
+    //         return $currentMember;
+    //     } else {
+    //         // Échec de l'authentification
+    //         return back()->with('error', 'Identifiants invalides');
+    //     }
+    // }
 
     public function login(Request $request)
     {
@@ -31,11 +51,15 @@ class Security extends Controller
         if (Auth::attempt($credentials)) {
             // L'utilisateur est authentifié
             //return response()->json($credentials);
+
             $member_id = User::getUserIdByEmail($credentials['email']);
-            return Member::getMemberbyId($member_id);
+            $currentMember = Member::getMemberbyId($member_id);
+            return $currentMember;
+
         } else {
             // Échec de l'authentification
-            return back()->with('error', 'Identifiants invalides');
+            return Response()->json(["error" => "Identifiants invalides"]);
+            // back()->with('error', 'Identifiants invalides');
         }
     }
 
@@ -45,21 +69,21 @@ class Security extends Controller
         return response()->json(["message"=> "ok"]);
     }
 
-    public function changePassword(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        $user = Auth::user();
-        if(Auth::attempt($credentials)){
-            if (Hash::check($request->input('old_password'), $user->password)){
-                $user->password = Hash::make($request->input('new_password'));
-                $user->save();
-                $member = Member::getByUserId($user->id);
-                return response()->json($member);
-            } else {
-                return back()->with('error', 'Ancien mot de passe incorrect');
-            }
-        }
-    }
+    // public function changePassword(Request $request)
+    // {
+    //     $credentials = $request->only('email', 'password');
+    //     $user = Auth::user();
+    //     if(Auth::attempt($credentials)){
+    //         if (Hash::check($request->input('old_password'), $user->password)){
+    //             $user->password = Hash::make($request->input('new_password'));
+    //             $user->save();
+    //             $member = Member::getByUserId($user->id);
+    //             return response()->json($member);
+    //         } else {
+    //             return back()->with('error', 'Ancien mot de passe incorrect');
+    //         }
+    //     }
+    // }
     public function getAllUser(){
         $users = User::getAllUser();
         return response()->json($users);

@@ -23,6 +23,6 @@ class Relation extends Model
     }
 
     public static function updateRelation($relation){
-        $this->update($relation);
+        self::update($relation);
     }
 }

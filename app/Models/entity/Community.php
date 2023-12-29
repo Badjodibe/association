@@ -52,7 +52,7 @@ class Community extends Model
     }
     public static function getMembersByName($name)
     {
-        return $this->members()->where('name', 'like', '%' . $name . '%')->get();
+        return self::where('name', 'like', '%' . $name . '%')->get();
     }
     // Delete
     public static function deleteCommunity($community_id)

@@ -67,7 +67,7 @@ Route::put('/documents/update', [DocumentController::class, 'updateDocument']);
 
 Route::get('/user', [Security::class, 'getAllUser']);
 Route::post('/user/add', [Security::class, 'createUser']);
-Route::get('/login', [Security::class, 'login']);
+Route::post('/login', [Security::class, 'login']);
 Route::get('/passwordchange', [Security::class, 'changePassword']);
 Route::get('/documents/{id}', [Security::class, 'getDocumentById']);
 Route::put('/documents/update', [Security::class, 'updateDocument']);
