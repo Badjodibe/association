@@ -4,11 +4,12 @@ namespace App\Models\entity;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 
 class Member extends Model
 {
-    protected $fillable = ["name", "surnames", "community_id", "user_id", "filliere", "belongDate","photo","description", "role_id"];
+    protected $fillable = ["name", "surnames","community_id", "user_id", "filliere", "belongDate","photo","description", "role_id"];
     protected $table = 'membres';
     // Relations
     public function community()
@@ -16,7 +17,7 @@ class Member extends Model
         return $this->belongsTo(Community::class, 'communaute_id');
     }
     public function user(){
-        return $this->belongTo(User::Class);
+        return $this->belongTo(User::class);
     }
     // Create
     public static function createMember($member)
