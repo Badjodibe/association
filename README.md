@@ -1,66 +1,30 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Description du projet
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Ce repertoire est un projet, plus précisement une application web consistant a gérer une conféderation. Cette conféderation est l'union de plusieurs communautés indépendants de pays differents, unis par le désir d'atteindre des but commun. L'objectif est de développer une applications avec des nouvelles technologies qui va permettre des gérer different aspect de cette conféderation. 
+Ce projet á été principalement développer avec laravel, le framework de PHP le plus utilisé. Il est a la fois intuitif, ce qui le rend facile á utilisé et très puissant.
 
-## About Laravel
+### Les aspects pris en compte dans cette application
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Gestion de l'ensemble de membre de la conféderation, leurs informations personnelles
+Gestion de chaque communauté de la conféderation, leur organisation
+Gestion corps administratif de la confédération
+Gestions des documents administratifs de la confédération
+Gestion des Partenaires
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Les technologies utilisés dans cette application
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Ce projet est principalement developper avec PHP, et son framework Laravel, les concepts qui utilisé dans ce projet son les suivants:
 
-## Learning Laravel
+Les migrations pour la définition de la structure des tables de la base de données, et relations entre ces derniers 
+Les models éloquant de laravel pour etablir la connexion avec la base de donnée et effectué les opérations crud sur les données de la base de données
+Nous avons séparé le front end et le back, et établir la connexion en utilisant la puissance des API de laravel
+Les controleurs sont indispensable étant donnée que nous avons utilisé le modèle MVC, ces dernier nous ont servie a faire appèl a des fonctions HTTPs spécials
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Le system de gestion de base de données
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Le système de gestion de base de donnée utilisé dans ce projet est le MySQL, un SGBD l'un des puissant SGBD a accès gratuit
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Le font end
 
-## Laravel Sponsors
+Le front end de ce projet a été developper avec React.Js principale sa bibliotheque Material UI
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
